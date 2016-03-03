@@ -35,7 +35,18 @@ void EnableInterrupts(void);  // Enable interrupts
 
 int main(void){ 
   TExaS_Init(SW_PIN_PE210, LED_PIN_PB543210); // activate grader and set system clock to 80 MHz
- 
+	
+	SYSCTL_RCGCGPIO_R |= 0x32;
+	int delay = SYSCTL_RCGCGPIO_R;
+	GPIO_PORTB_DIR_R |= 0x3F; 				// initialize port b
+	GPIO_PORTB_AFSEL_R &= 0xC0;
+	GPIO_PORTB_DEN_R |= 0x3F;
+	GPIO_PORTE_DIR_R &= 0xF8;					// initialize port e
+	GPIO_PORTE_AFSEL_R &= 0xF8;
+	GPIO_PORTE_DEN_R |= 0x07;
+	GPIO_PORTF_DIR_R |= 0x0A;					// initialize port f
+	GPIO_PORTF_AFSEL_R &= 0xF5;
+	GPIO_PORTF_DEN_R |= 0x0A;
   
   EnableInterrupts();
   while(1){
