@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include "TExaS.h"
 #include "tm4c123gh6pm.h"
+#include "SysTick.h"
 
 // ***** 2. Global Declarations Section *****
 
@@ -56,21 +57,21 @@ typedef const struct State {
 } State;
 
 State FSM[18] = {
-	{0x21, 0x03, 3000, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
-	{0x21, 0x03, 3000, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
-	{0x21, 0x03, 3000, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
-	{0x22, 0x03, 1000, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
-	{0x22, 0x03, 1000, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
-	{0x22, 0x03, 1000, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
-	{0x0C, 0x03, 3000, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
-	{0x0C, 0x03, 3000, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
-	{0x14, 0x03, 1000, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
-	{0x14, 0x03, 1000, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitWP
-	{0x14, 0x03, 1000, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
-	{0x24, 0x01, 3000, {GoP, WaitPW, WaitPS, WaitPSW, GoP, WaitPW, WaitPS, WaitPSW}}, // GoP
-	{0x24, 0x02, 1000, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitPS
-	{0x24, 0x02, 1000, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitPW
-	{0x24, 0x02, 1000, {GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW}} // WaitPSW
+	{0x21, 0x02, 30, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
+	{0x21, 0x02, 30, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
+	{0x21, 0x02, 30, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
+	{0x22, 0x02, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
+	{0x22, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
+	{0x22, 0x02, 10, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
+	{0x0C, 0x02, 30, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
+	{0x0C, 0x02, 30, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
+	{0x14, 0x02, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
+	{0x14, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitWP
+	{0x14, 0x02, 10, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
+	{0x24, 0x08, 30, {GoP, WaitPW, WaitPS, WaitPSW, GoP, WaitPW, WaitPS, WaitPSW}}, // GoP
+	{0x24, 0x04, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitPS
+	{0x24, 0x04, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitPW
+	{0x24, 0x04, 10, {GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW}} // WaitPSW
 };
 // ***** 3. Subroutines Section *****
 
@@ -79,19 +80,27 @@ int main(void){
 	
 	SYSCTL_RCGCGPIO_R |= 0x32;
 	int delay = SYSCTL_RCGC2_R;
-	GPIO_PORTB_DIR_R |= 0x3F; 				// initialize port b
+	GPIO_PORTB_DIR_R |= 0x3F; 				// initialize port b for traffic lights
 	GPIO_PORTB_AFSEL_R &= 0xC0;
 	GPIO_PORTB_DEN_R |= 0x3F;
-	GPIO_PORTE_DIR_R &= 0xF8;					// initialize port e
+	GPIO_PORTE_DIR_R &= 0xF8;					// initialize port e for sensor inputs
 	GPIO_PORTE_AFSEL_R &= 0xF8;
 	GPIO_PORTE_DEN_R |= 0x07;
-	GPIO_PORTF_DIR_R |= 0x0A;					// initialize port f
+	GPIO_PORTF_DIR_R |= 0x0A;					// initialize port f for pedestrian lights
 	GPIO_PORTF_AFSEL_R &= 0xF5;
 	GPIO_PORTF_DEN_R |= 0x0A;
+	SysTick_Init();
   
+	uint32_t state = 0;
+	
   EnableInterrupts();
   while(1){
-     
+		uint32_t sensorData = GPIO_PORTE_DATA_R & 0x07;
+		GPIO_PORTB_DATA_R = FSM[state].trafficOut;
+		GPIO_PORTF_DATA_R = FSM[state].pedestrianOut;
+		
+		SysTick_Wait10ms(FSM[state].waitTime);
+    state = FSM[state].nextState[sensorData];
   }
 }
 
