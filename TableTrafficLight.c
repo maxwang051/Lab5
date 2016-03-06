@@ -44,9 +44,13 @@ void EnableInterrupts(void);  // Enable interrupts
 #define WaitWP 9
 #define WaitWSP 10
 #define GoP 11
-#define WaitPS 12
-#define WaitPW 13
-#define WaitPSW 14
+#define WaitP 12
+//#define WaitPW 13
+//#define WaitPSW 14
+#define Flash1 13
+#define Flash2 14
+#define Flash3 15
+#define Flash4 16
 
 
 typedef const struct State {
@@ -56,22 +60,26 @@ typedef const struct State {
 	uint32_t nextState[8];
 } State;
 
-State FSM[18] = {
-	{0x21, 0x02, 30, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
-	{0x21, 0x02, 30, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
-	{0x21, 0x02, 30, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
-	{0x22, 0x02, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
-	{0x22, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
-	{0x22, 0x02, 10, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
-	{0x0C, 0x02, 30, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
-	{0x0C, 0x02, 30, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
-	{0x14, 0x02, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
-	{0x14, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitWP
-	{0x14, 0x02, 10, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
-	{0x24, 0x08, 30, {GoP, WaitPW, WaitPS, WaitPSW, GoP, WaitPW, WaitPS, WaitPSW}}, // GoP
-	{0x24, 0x04, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitPS
-	{0x24, 0x04, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitPW
-	{0x24, 0x04, 10, {GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW}} // WaitPSW
+State FSM[17] = {
+	{0x21, 0x02, 40, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
+	{0x21, 0x02, 40, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
+	{0x21, 0x02, 40, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
+	{0x22, 0x02, 20, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
+	{0x22, 0x02, 20, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
+	{0x22, 0x02, 20, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
+	{0x0C, 0x02, 40, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
+	{0x0C, 0x02, 40, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
+	{0x14, 0x02, 20, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
+	{0x14, 0x02, 20, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitWP
+	{0x14, 0x02, 20, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
+	{0x24, 0x08, 40, {GoP, WaitP, WaitP, WaitP, GoP, WaitP, WaitP, WaitP}}, // GoP
+	{0x24, 0x00, 5, {Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1}}, // WaitP
+	//{0x24, 0x00, 5, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitPW
+	//{0x24, 0x00, 5, {GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW}}, // WaitPSW
+	{0x24, 0x02, 5, {Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2}}, // Flash1
+	{0x24, 0x00, 5, {Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3}}, // Flash2
+	{0x24, 0x02, 5, {Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4}}, // Flash3
+	{0x24, 0x00, 5, {GoS, GoW, GoS, GoSW, GoP, GoW, GoS, GoSW}} // Flash4
 };
 // ***** 3. Subroutines Section *****
 
