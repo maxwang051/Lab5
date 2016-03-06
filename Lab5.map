@@ -277,8 +277,8 @@ Image Symbol Table
     i.TExaS_Init                             0x000006d8   Section        0  texas.o(i.TExaS_Init)
     i.Timer5A_Handler                        0x0000084c   Section        0  texas.o(i.Timer5A_Handler)
     i.main                                   0x00000e48   Section        0  tabletrafficlight.o(i.main)
-    .constdata                               0x00000f70   Section      748  tabletrafficlight.o(.constdata)
-    .constdata                               0x0000125c   Section    14264  texas.o(.constdata)
+    .constdata                               0x00000f88   Section      924  tabletrafficlight.o(.constdata)
+    .constdata                               0x00001324   Section    14264  texas.o(.constdata)
     .data                                    0x20000000   Section       68  texas.o(.data)
     RealGrade                                0x2000001c   Data           4  texas.o(.data)
     .bss                                     0x20000048   Section      628  texas.o(.bss)
@@ -521,27 +521,27 @@ Image Symbol Table
     SysTick_Wait10ms                         0x000006bd   Thumb Code    22  systick.o(i.SysTick_Wait10ms)
     TExaS_Init                               0x000006d9   Thumb Code   248  texas.o(i.TExaS_Init)
     Timer5A_Handler                          0x0000084d   Thumb Code  1510  texas.o(i.Timer5A_Handler)
-    main                                     0x00000e49   Thumb Code   236  tabletrafficlight.o(i.main)
-    FSM                                      0x00000f70   Data         748  tabletrafficlight.o(.constdata)
-    Port                                     0x0000125c   Data          24  texas.o(.constdata)
-    InputPortMsgA                            0x00001274   Data          40  texas.o(.constdata)
-    OutputPortMsgA                           0x0000129c   Data          40  texas.o(.constdata)
-    InputPortMsgB                            0x000012c4   Data          40  texas.o(.constdata)
-    OutputPortMsgB                           0x000012ec   Data          40  texas.o(.constdata)
-    InputPortMsgE                            0x00001314   Data          40  texas.o(.constdata)
-    OutputPortMsgE                           0x0000133c   Data          40  texas.o(.constdata)
-    BlankMsg                                 0x00001364   Data          40  texas.o(.constdata)
-    InitializedMsg                           0x0000138c   Data          40  texas.o(.constdata)
-    IntroMsg                                 0x000013b4   Data          40  texas.o(.constdata)
-    DoneMsg                                  0x000013dc   Data          40  texas.o(.constdata)
-    TestMsg                                  0x00001404   Data          40  texas.o(.constdata)
-    LabTest                                  0x0000142c   Data       11328  texas.o(.constdata)
-    BgTest                                   0x0000406c   Data        2400  texas.o(.constdata)
-    Key                                      0x000049cc   Data           8  texas.o(.constdata)
-    Scramble                                 0x000049d4   Data          32  texas.o(.constdata)
-    DeScramble                               0x000049f4   Data          32  texas.o(.constdata)
-    Region$$Table$$Base                      0x00004a14   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00004a34   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x00000e49   Thumb Code   254  tabletrafficlight.o(i.main)
+    FSM                                      0x00000f88   Data         924  tabletrafficlight.o(.constdata)
+    Port                                     0x00001324   Data          24  texas.o(.constdata)
+    InputPortMsgA                            0x0000133c   Data          40  texas.o(.constdata)
+    OutputPortMsgA                           0x00001364   Data          40  texas.o(.constdata)
+    InputPortMsgB                            0x0000138c   Data          40  texas.o(.constdata)
+    OutputPortMsgB                           0x000013b4   Data          40  texas.o(.constdata)
+    InputPortMsgE                            0x000013dc   Data          40  texas.o(.constdata)
+    OutputPortMsgE                           0x00001404   Data          40  texas.o(.constdata)
+    BlankMsg                                 0x0000142c   Data          40  texas.o(.constdata)
+    InitializedMsg                           0x00001454   Data          40  texas.o(.constdata)
+    IntroMsg                                 0x0000147c   Data          40  texas.o(.constdata)
+    DoneMsg                                  0x000014a4   Data          40  texas.o(.constdata)
+    TestMsg                                  0x000014cc   Data          40  texas.o(.constdata)
+    LabTest                                  0x000014f4   Data       11328  texas.o(.constdata)
+    BgTest                                   0x00004134   Data        2400  texas.o(.constdata)
+    Key                                      0x00004a94   Data           8  texas.o(.constdata)
+    Scramble                                 0x00004a9c   Data          32  texas.o(.constdata)
+    DeScramble                               0x00004abc   Data          32  texas.o(.constdata)
+    Region$$Table$$Base                      0x00004adc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00004afc   Number         0  anon$$obj.o(Region$$Table)
     InPort                                   0x20000000   Data           4  texas.o(.data)
     OutPort                                  0x20000004   Data           4  texas.o(.data)
     BgTestStatus                             0x20000008   Data          15  texas.o(.data)
@@ -570,9 +570,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00004a78, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00004b40, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x00004a34, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x00004afc, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -643,10 +643,10 @@ Memory Map of the image
     0x000006bc   0x0000001c   Code   RO           37    i.SysTick_Wait10ms  systick.o
     0x000006d8   0x00000174   Code   RO           69    i.TExaS_Init        texas.o
     0x0000084c   0x000005fc   Code   RO           71    i.Timer5A_Handler   texas.o
-    0x00000e48   0x00000128   Code   RO           12    i.main              tabletrafficlight.o
-    0x00000f70   0x000002ec   Data   RO           13    .constdata          tabletrafficlight.o
-    0x0000125c   0x000037b8   Data   RO           74    .constdata          texas.o
-    0x00004a14   0x00000020   Data   RO          311    Region$$Table       anon$$obj.o
+    0x00000e48   0x00000140   Code   RO           12    i.main              tabletrafficlight.o
+    0x00000f88   0x0000039c   Data   RO           13    .constdata          tabletrafficlight.o
+    0x00001324   0x000037b8   Data   RO           74    .constdata          texas.o
+    0x00004adc   0x00000020   Data   RO          311    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x00000044, Max: 0xffffffff, ABSOLUTE)
@@ -677,11 +677,11 @@ Image component sizes
 
        692        632          0          0       1024        932   startup.o
         84          6          0          0          0       1761   systick.o
-       296         60        748          0          0       5605   tabletrafficlight.o
+       320         66        924          0          0       5709   tabletrafficlight.o
       2608        298      14264         68        628      15370   texas.o
 
     ----------------------------------------------------------------------
-      3680        996      15044         68       1656      23668   Object Totals
+      3704       1002      15220         68       1656      23772   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          4          0   (incl. Padding)
 
@@ -730,15 +730,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3952       1012      15044         68       1756      23412   Grand Totals
-      3952       1012      15044         68       1756      23412   ELF Image Totals
-      3952       1012      15044         68          0          0   ROM Totals
+      3976       1018      15220         68       1756      23516   Grand Totals
+      3976       1018      15220         68       1756      23516   ELF Image Totals
+      3976       1018      15220         68          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                18996 (  18.55kB)
+    Total RO  Size (Code + RO Data)                19196 (  18.75kB)
     Total RW  Size (RW Data + ZI Data)              1824 (   1.78kB)
-    Total ROM Size (Code + RO Data + RW Data)      19064 (  18.62kB)
+    Total ROM Size (Code + RO Data + RW Data)      19264 (  18.81kB)
 
 ==============================================================================
 

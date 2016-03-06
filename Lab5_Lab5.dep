@@ -1,6 +1,6 @@
 Dependencies for Project 'Lab5', Target 'Lab5': (DO NOT MODIFY !)
 F (.\startup.s)(0x56D8C1BA)(--cpu Cortex-M4 --pd "__RTX SETA 1" --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\TableTrafficLight.c)(0x56DB8261)(-c --cpu Cortex-M4 -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\tabletrafficlight.o --omf_browse .\tabletrafficlight.crf --depend .\tabletrafficlight.d)
+F (.\TableTrafficLight.c)(0x56DB8EA9)(-c --cpu Cortex-M4 -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\tabletrafficlight.o --omf_browse .\tabletrafficlight.crf --depend .\tabletrafficlight.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C87C24)
 I (TExaS.h)(0x56D8C1BA)
 I (tm4c123gh6pm.h)(0x56D8C1BA)
