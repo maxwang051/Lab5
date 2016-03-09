@@ -63,25 +63,25 @@ typedef const struct State {
 } State;
 
 State FSM[21] = {
-	{0x21, 0x02, 20, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
-	{0x21, 0x02, 20, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
-	{0x21, 0x02, 20, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
-	{0x22, 0x02, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
-	{0x22, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
-	{0x22, 0x02, 10, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
-	{0x0C, 0x02, 20, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
-	{0x0C, 0x02, 20, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
-	{0x14, 0x02, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
-	{0x14, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitWP
-	{0x14, 0x02, 10, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
-	{0x24, 0x08, 20, {GoP, WaitP, WaitP, WaitP, GoP, WaitP, WaitP, WaitP}}, // GoP
-	{0x24, 0x00, 5, {Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1}}, // WaitP
+	{0x21 << 2, 0x02, 20, {GoS, WaitSW, GoS, WaitSW, WaitSP, WaitSWP, WaitSP, WaitSWP}}, // GoS
+	{0x21 << 2, 0x02, 20, {WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW, WaitSW}}, // GoSW
+	{0x21 << 2, 0x02, 20, {WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP, WaitSP}}, // GoSP
+	{0x22 << 2, 0x02, 10, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitSW
+	{0x22 << 2, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitSP
+	{0x22 << 2, 0x02, 10, {GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP, GoWP}}, // WaitSWP
+	{0x0C << 2, 0x02, 20, {GoW, GoW, WaitWS, WaitWS, WaitWP, WaitWP, WaitWSP, WaitWSP}}, // GoW
+	{0x0C << 2, 0x02, 20, {WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP, WaitWP}}, // GoWP
+	{0x14 << 2, 0x02, 10, {GoS, GoS, GoS, GoS, GoS, GoS, GoS, GoS}}, // WaitWS
+	{0x14 << 2, 0x02, 10, {GoP, GoP, GoP, GoP, GoP, GoP, GoP, GoP}}, // WaitWP
+	{0x14 << 2, 0x02, 10, {GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP, GoSP}}, // WaitWSP
+	{0x24 << 2, 0x08, 40, {GoP, WaitP, WaitP, WaitP, GoP, WaitP, WaitP, WaitP}}, // GoP
+	{0x24 << 2, 0x00, 5, {Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1, Flash1}}, // WaitP
 	//{0x24, 0x00, 5, {GoW, GoW, GoW, GoW, GoW, GoW, GoW, GoW}}, // WaitPW
 	//{0x24, 0x00, 5, {GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW, GoSW}}, // WaitPSW
-	{0x24, 0x02, 5, {Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2}}, // Flash1
-	{0x24, 0x00, 5, {Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3}}, // Flash2
-	{0x24, 0x02, 5, {Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4}}, // Flash3
-	{0x24, 0x00, 5, {GoS, GoW, GoS, GoSW, GoP, GoW, GoS, GoSW}} // Flash4
+	{0x24 << 2, 0x02, 5, {Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2, Flash2}}, // Flash1
+	{0x24 << 2, 0x00, 5, {Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3, Flash3}}, // Flash2
+	{0x24 << 2, 0x02, 5, {Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4, Flash4}}, // Flash3
+	{0x24 << 2, 0x00, 5, {GoS, GoW, GoS, GoSW, GoP, GoW, GoS, GoSW}} // Flash4
 	//{,,5{1,2,3,Check2,5,6,7,8}},//Check1
 	//{,,5{1,2,3,Check3,5,6,7,8}},//Check2
 	//{,,5{1,2,3,Check4,5,6,7,8}},//Check3
@@ -92,11 +92,11 @@ State FSM[21] = {
 int main(void){ 
   TExaS_Init(SW_PIN_PE210, LED_PIN_PB543210); // activate grader and set system clock to 80 MHz
 	
-	SYSCTL_RCGCGPIO_R |= 0x32;
+	SYSCTL_RCGC2_R |= 0x31;
 	int delay = SYSCTL_RCGC2_R;
-	GPIO_PORTB_DIR_R |= 0x3F; 				// initialize port b for traffic lights
-	GPIO_PORTB_AFSEL_R &= 0xC0;
-	GPIO_PORTB_DEN_R |= 0x3F;
+	GPIO_PORTA_DIR_R |= 0xFC; 				// initialize port b for traffic lights
+	GPIO_PORTA_AFSEL_R &= ~0xFC;
+	GPIO_PORTA_DEN_R |= 0xFC;
 	GPIO_PORTE_DIR_R &= 0xF8;					// initialize port e for sensor inputs
 	GPIO_PORTE_AFSEL_R &= 0xF8;
 	GPIO_PORTE_DEN_R |= 0x07;
@@ -111,7 +111,7 @@ int main(void){
   while(1){
 		uint32_t sensorData = GPIO_PORTE_DATA_R & 0x07;
 		uint32_t walkHeld = sensorData & 0x04;
-		GPIO_PORTB_DATA_R = FSM[state].trafficOut;
+		GPIO_PORTA_DATA_R = FSM[state].trafficOut;
 		GPIO_PORTF_DATA_R = FSM[state].pedestrianOut;
 		
 		SysTick_Wait10ms(FSM[state].waitTime);
